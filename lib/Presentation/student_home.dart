@@ -53,6 +53,12 @@ class _ScreenStudentHomeState extends State<ScreenStudentHome> {
               child: ListView.separated(
                 itemBuilder: (context, index) {
                   return ListTile(
+                    onTap: () {
+                      changeStatus(
+                        studentsList[index].id,
+                        studentsList[index].studentStatus,
+                      );
+                    },
                     leading: Text('${index + 1}'.toString()),
                     title: Text(studentsList[index].studentName),
                     subtitle: Text(
@@ -98,10 +104,10 @@ class _ScreenStudentHomeState extends State<ScreenStudentHome> {
     });
   }
 
-  void changeStatus(StudentModel s) {
-    String newStatus = s.studentStatus == '0' ? '1' : '0';
+  void changeStatus(String id, String status) {
     for (var doc in studentsList) {
-      if (doc.id == s.id) {
+      if (doc.id == id) {
+        String newStatus = status == '0' ? '1' : '0';
         doc.studentStatus = newStatus;
       }
     }
